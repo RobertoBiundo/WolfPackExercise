@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmployeeRepo extends CrudRepository<Employee, Integer> {
     Employee findById(int id);
-    List<Employee> findAllById(List<Integer> employee_ids);
+    List<Employee> findAllByIdIsIn(List<Integer> employee_ids);
 }

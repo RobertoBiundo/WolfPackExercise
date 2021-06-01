@@ -13,6 +13,6 @@ public interface IPackService {
     boolean deletePack(int pack_id);
     boolean createPack(PackForAlterationDTO packDTO);
     boolean updatePack(PackForAlterationDTO packDTO);
-    boolean removeEmployees(int pack_id, List<Employee> employee_list);
-    boolean addEmployees(int pack_id, List<Employee> employee_list);
+    boolean removeEmployees(int pack_id, Iterable<Employee> employee_list);
+    boolean addEmployees(int pack_id, Iterable<Employee> employee_list);
 }

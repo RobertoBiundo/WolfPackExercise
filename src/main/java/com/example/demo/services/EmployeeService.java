@@ -36,7 +36,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Iterable<Employee> getEmployees(List<Integer> employee_ids) {
-        return employeeRepo.findAllById(employee_ids);
+        return employeeRepo.findAllByIdIsIn(employee_ids);
     }
 
     @Override

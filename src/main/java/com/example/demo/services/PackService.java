@@ -60,34 +60,35 @@ public class PackService implements IPackService {
     }
 
     @Override
-    public Pack createPack(PackForAlterationDTO packDTO) {
+    public boolean createPack(PackForAlterationDTO packDTO) {
         try{
             Pack pack = new Pack(packDTO);
 
             // set id to 0 to prevent update of existing record on create
             pack.setId(0);
 
-            return packRepo.save(pack);
+            packRepo.save(pack);
+            return true;
         }catch (Exception ex){
             LoggerService.warn(ex.getMessage());
-            return null;
+            return false;
         }
     }
 
     @Override
-    public PackDTO updatePack(PackForAlterationDTO packDTO) {
+    public boolean updatePack(PackForAlterationDTO packDTO) {
         try {
             Pack pack = new Pack(packDTO);
             packRepo.save(pack);
-            return new PackDTO(pack);
+            return true;
         }catch (Exception ex){
             LoggerService.warn(ex.getMessage());
-            return null;
+            return false;
         }
     }
 
     @Override
-    public boolean removeEmployees(int pack_id, List<Employee> employee_list) {
+    public boolean removeEmployees(int pack_id, Iterable<Employee> employee_list) {
         try{
             if(pack_id == 0 || employee_list == null){ return false; }
 
@@ -108,7 +109,7 @@ public class PackService implements IPackService {
     }
 
     @Override
-    public boolean addEmployees(int pack_id, List<Employee> employee_list) {
+    public boolean addEmployees(int pack_id, Iterable<Employee> employee_list) {
         try{
             if(pack_id == 0 || employee_list == null){ return false; }
 
