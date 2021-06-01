@@ -29,7 +29,7 @@ public class Pack implements Serializable {
 
     @ManyToMany(
 //        targetEntity=com.example.demo.objects.models.Employee.class,
-        cascade={CascadeType.ALL}
+        cascade={CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JoinTable(
         name = "pack_members",
@@ -40,6 +40,16 @@ public class Pack implements Serializable {
 
     public Collection getEmployees() {
         return employees;
+    }
+
+    public void addEmployee(Employee employee){
+        this.employees.add(employee);
+        employee.getPacks().add(this);
+    }
+
+    public void removeEmployee(Employee employee){
+        this.employees.remove(employee);
+        employee.getPacks().remove(this);
     }
 
     public int getId() {
