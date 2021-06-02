@@ -16,4 +16,16 @@ public class ResponseDTO {
     }
 
     public ResponseDTO(){}
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Object getBody() {
+        return body;
+    }
 }

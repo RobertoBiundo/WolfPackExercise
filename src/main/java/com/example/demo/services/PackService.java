@@ -100,6 +100,7 @@ public class PackService implements IPackService {
                 pack.removeEmployee(employee);
             }
 
+            packRepo.save(pack);
             return true;
         }
         catch (Exception ex){
@@ -121,6 +122,7 @@ public class PackService implements IPackService {
                 pack.addEmployee(employee);
             }
 
+            packRepo.save(pack);
             return true;
         }
         catch (Exception ex){

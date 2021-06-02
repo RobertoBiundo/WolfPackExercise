@@ -30,6 +30,13 @@ public class EmployeeController {
     }
 
     @GetMapping(path="")
+    public  @ResponseBody ResponseEntity<ResponseDTO> getAllVisibleEmployees() {
+        Iterable<EmployeeDTO> employees = service.getAllVisibleEmployees();
+
+        return new ResponseEntity<>(new ResponseDTO(true, employees), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/all")
     public  @ResponseBody ResponseEntity<ResponseDTO> getAllEmployees() {
         Iterable<EmployeeDTO> employees = service.getAllEmployees();
 
@@ -53,7 +60,7 @@ public class EmployeeController {
 
     @PostMapping(path="")
     public @ResponseBody ResponseEntity<ResponseDTO> createEmployee(@RequestBody EmployeeForAlterationDTO employeeDTO) {
-        if(employeeDTO.validateForCreation()){
+        if(Boolean.FALSE.equals(employeeDTO.validateForCreation())){
             return new ResponseEntity<>(new ResponseDTO(false, "Please provide valid data for the creation"), HttpStatus.CONFLICT);
         }
 
@@ -68,7 +75,7 @@ public class EmployeeController {
 
     @PutMapping(path ="")
     public @ResponseBody ResponseEntity<ResponseDTO> updateEmployee(@RequestBody EmployeeForAlterationDTO employeeDTO) {
-        if(employeeDTO.validateForUpdate()){
+        if(Boolean.FALSE.equals(employeeDTO.validateForUpdate())){
             return new ResponseEntity<>(new ResponseDTO(false, "Please provide valid data for the update"), HttpStatus.CONFLICT);
         }
 

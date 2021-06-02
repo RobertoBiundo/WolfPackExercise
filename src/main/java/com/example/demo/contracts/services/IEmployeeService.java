@@ -9,6 +9,7 @@ import java.util.List;
 public interface IEmployeeService {
     EmployeeDTO getEmployee(int employee_id);
     Iterable<EmployeeDTO> getAllEmployees();
+    Iterable<EmployeeDTO> getAllVisibleEmployees();
     Iterable<Employee> getEmployees(List<Integer> employee_ids);
     boolean deleteEmployee(int employee_id);
     boolean createEmployee(EmployeeForAlterationDTO employeeDTO);

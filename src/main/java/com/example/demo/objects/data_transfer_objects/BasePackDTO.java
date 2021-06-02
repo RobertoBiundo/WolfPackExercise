@@ -2,20 +2,16 @@ package com.example.demo.objects.data_transfer_objects;
 
 import com.example.demo.objects.models.Pack;
 
-import java.util.Collection;
-
-public class PackDTO {
+public class BasePackDTO {
     private int id;
     private String name;
-    private Collection employees;
 
-    public PackDTO() {
+    public BasePackDTO() {
     }
 
-    public PackDTO(Pack pack) {
+    public BasePackDTO(Pack pack) {
         this.id = pack.getId();
         this.name = pack.getName();
-        this.employees = pack.getEmployees();
     }
 
     public int getId() {
@@ -28,9 +24,5 @@ public class PackDTO {
 
     public String getName() {
         return name;
-    }
-
-    public Collection getEmployees() {
-        return employees;
     }
 }

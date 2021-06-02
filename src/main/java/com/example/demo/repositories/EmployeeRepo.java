@@ -8,4 +8,5 @@ import java.util.List;
 public interface EmployeeRepo extends CrudRepository<Employee, Integer> {
     Employee findById(int id);
     List<Employee> findAllByIdIsIn(List<Integer> employee_ids);
+    List<Employee> findByVisible(boolean visible);
 }

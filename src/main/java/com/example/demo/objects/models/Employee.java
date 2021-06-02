@@ -1,6 +1,7 @@
 package com.example.demo.objects.models;
 
 import com.example.demo.objects.data_transfer_objects.EmployeeForAlterationDTO;
+import com.example.demo.objects.data_transfer_objects.BasePackDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +14,6 @@ import java.util.Set;
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="employee_id")
     private int id;
 
     private boolean visible;
@@ -42,6 +42,7 @@ public class Employee implements Serializable {
 
 
     public Employee(EmployeeForAlterationDTO employeeDTO) {
+        this.id = employeeDTO.getId();
         this.visible = employeeDTO.isVisible();
         this.name = employeeDTO.getName();
         this.gender = employeeDTO.getGender();
@@ -57,8 +58,17 @@ public class Employee implements Serializable {
 
     private Set<Pack> packs = new HashSet<>();
 
+    public void setPacks(Set<Pack> packs) {
+        this.packs = packs;
+    }
+
     public Collection getPacks() {
-        return packs;
+        Set<BasePackDTO> packCollection = new HashSet<>();
+        for(Pack pack : packs){
+            packCollection.add(new BasePackDTO(pack));
+        }
+
+        return packCollection;
     }
 
     public int getId() {

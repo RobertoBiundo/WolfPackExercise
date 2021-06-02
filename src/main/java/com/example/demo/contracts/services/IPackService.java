@@ -3,9 +3,6 @@ package com.example.demo.contracts.services;
 import com.example.demo.objects.data_transfer_objects.PackDTO;
 import com.example.demo.objects.data_transfer_objects.PackForAlterationDTO;
 import com.example.demo.objects.models.Employee;
-import com.example.demo.objects.models.Pack;
-
-import java.util.List;
 
 public interface IPackService {
     PackDTO getPack(int pack_id);

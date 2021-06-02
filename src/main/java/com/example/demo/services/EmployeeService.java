@@ -35,6 +35,12 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public Iterable<EmployeeDTO> getAllVisibleEmployees() {
+        List<Employee> employees = employeeRepo.findByVisible(true);
+        return this.convertListToDTO(employees);
+    }
+
+    @Override
     public Iterable<Employee> getEmployees(List<Integer> employee_ids) {
         return employeeRepo.findAllByIdIsIn(employee_ids);
     }
@@ -67,7 +73,7 @@ public class EmployeeService implements IEmployeeService {
             // set id to 0 to prevent update of existing record on create
             employee.setId(0);
 
-            employeeRepo.save(employee);
+            Employee test = employeeRepo.save(employee);
             return true;
         }catch (Exception ex){
             LoggerService.warn(ex.getMessage());

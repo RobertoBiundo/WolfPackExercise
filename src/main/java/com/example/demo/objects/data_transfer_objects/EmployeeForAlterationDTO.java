@@ -1,14 +1,19 @@
 package com.example.demo.objects.data_transfer_objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.Date;
 
 import static com.example.demo.helpers.util.Validator.validateStringValue;
 
+@CrossOrigin
 public class EmployeeForAlterationDTO {
     private int id;
     private boolean visible = true;
     private String name;
     private int gender;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date birthdate;
     private String job;
 

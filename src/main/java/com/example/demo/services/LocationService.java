@@ -7,7 +7,6 @@ import com.example.demo.objects.data_transfer_objects.LocationForAlterationDTO;
 import com.example.demo.objects.models.Location;
 import com.example.demo.repositories.LocationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.origin.TextResourceOrigin;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +29,17 @@ public class LocationService implements ILocationService {
     }
 
     @Override
+    public LocationDTO getLocationByEmployee(int employee_id) {
+        if(employee_id == 0){return new LocationDTO();}
+
+        Location location = locationRepo.findByEmployee_id(employee_id);
+
+        if(location == null){ return null; }
+
+        return new LocationDTO(location);
+    }
+
+    @Override
     public Iterable<LocationDTO> getAllLocations() {
         List<Location> locations = (List) locationRepo.findAll();
         return this.convertListToDTO(locations);
@@ -38,13 +48,13 @@ public class LocationService implements ILocationService {
     @Override
     public boolean deleteLocation(int employee_id) {
         try{
-            Location location = locationRepo.findByEmployee(employee_id);
+            Location location = locationRepo.findByEmployee_id(employee_id);
 
             if(location == null){
                 return false;
             }
 
-            locationRepo.deleteByEmployee(location.getEmployee());
+            locationRepo.delete(location);
 
             return true;
         }catch (Exception ex){

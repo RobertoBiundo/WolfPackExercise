@@ -1,5 +1,6 @@
 package com.example.demo.objects.models;
 
+import com.example.demo.objects.data_transfer_objects.BaseEmployeeDTO;
 import com.example.demo.objects.data_transfer_objects.PackForAlterationDTO;
 
 import javax.persistence.*;
@@ -24,22 +25,27 @@ public class Pack implements Serializable {
     }
 
     public Pack(PackForAlterationDTO packDTO) {
+        this.id = packDTO.getId();
         this.name = packDTO.getName();
     }
 
     @ManyToMany(
-//        targetEntity=com.example.demo.objects.models.Employee.class,
         cascade={CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JoinTable(
         name = "pack_members",
         joinColumns = { @JoinColumn(name = "pack_id") },
-        inverseJoinColumns = { @JoinColumn(name = "employee_id")}
+        inverseJoinColumns = { @JoinColumn(name = "id")}
     )
     Set<Employee> employees = new HashSet<>();
 
     public Collection getEmployees() {
-        return employees;
+        Set<BaseEmployeeDTO> employeeCollection = new HashSet<>();
+        for(Employee employee : employees){
+            employeeCollection.add(new BaseEmployeeDTO(employee));
+        }
+
+        return employeeCollection;
     }
 
     public void addEmployee(Employee employee){

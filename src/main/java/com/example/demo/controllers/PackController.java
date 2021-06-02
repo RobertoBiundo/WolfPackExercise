@@ -4,6 +4,7 @@ import com.example.demo.contracts.services.IEmployeeService;
 import com.example.demo.contracts.services.IPackService;
 import com.example.demo.objects.data_transfer_objects.PackDTO;
 import com.example.demo.objects.data_transfer_objects.PackForAlterationDTO;
+import com.example.demo.objects.data_transfer_objects.PackMembersDTO;
 import com.example.demo.objects.data_transfer_objects.ResponseDTO;
 import com.example.demo.objects.models.Employee;
 import com.example.demo.services.EmployeeService;
@@ -13,9 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Iterator;
-import java.util.List;
 
 @Controller
 @RequestMapping("/pack")
@@ -63,7 +61,7 @@ public class PackController {
 
     @PostMapping(path="")
     public @ResponseBody ResponseEntity<ResponseDTO> createPack(@RequestBody PackForAlterationDTO packDTO) {
-        if(packDTO.validateForCreation()){
+        if(Boolean.FALSE.equals(packDTO.validateForCreation())){
             return new ResponseEntity<>(new ResponseDTO(false, "Please provide valid data for the creation"), HttpStatus.CONFLICT);
         }
 
@@ -77,14 +75,14 @@ public class PackController {
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody ResponseEntity<ResponseDTO> addToPack(@RequestBody int pack_id, @RequestBody List<Integer> employees) {
-        if(pack_id == 0 || employees.isEmpty()){
+    public @ResponseBody ResponseEntity<ResponseDTO> addToPack(@RequestBody PackMembersDTO packMembersDTO) {
+        if(packMembersDTO.getPack_id() == 0 || packMembersDTO.getEmployees().isEmpty()){
             return new ResponseEntity<>(new ResponseDTO(false, "please provide a valid pack identifier with employee identifiers."), HttpStatus.CONFLICT);
         }
 
-        Iterable<Employee> employee_list = employeeService.getEmployees(employees);
+        Iterable<Employee> employee_list = employeeService.getEmployees(packMembersDTO.getEmployees());
 
-        boolean result = service.addEmployees(pack_id, employee_list);
+        boolean result = service.addEmployees(packMembersDTO.getPack_id(), employee_list);
 
         if (Boolean.FALSE.equals(result)){
             return new ResponseEntity<>(new ResponseDTO(false, "Something went wrong while adding wolfs to the pack."), HttpStatus.CONFLICT);
@@ -94,14 +92,14 @@ public class PackController {
     }
 
     @PostMapping(path="/remove")
-    public @ResponseBody ResponseEntity<ResponseDTO> removeFromPack(@RequestBody int pack_id, @RequestBody List<Integer> employees) {
-        if(pack_id == 0 || employees.isEmpty()){
+    public @ResponseBody ResponseEntity<ResponseDTO> removeFromPack(@RequestBody PackMembersDTO packMembersDTO) {
+        if(packMembersDTO.getPack_id() == 0 || packMembersDTO.getEmployees().isEmpty()){
             return new ResponseEntity<>(new ResponseDTO(false, "please provide a valid pack identifier with employee identifiers."), HttpStatus.CONFLICT);
         }
 
-        Iterable<Employee> employee_list = employeeService.getEmployees(employees);
+        Iterable<Employee> employee_list = employeeService.getEmployees(packMembersDTO.getEmployees());
 
-        boolean result = service.removeEmployees(pack_id, employee_list);
+        boolean result = service.removeEmployees(packMembersDTO.getPack_id(), employee_list);
 
         if (Boolean.FALSE.equals(result)){
             return new ResponseEntity<>(new ResponseDTO(false, "Something went wrong while removing wolfs from the pack."), HttpStatus.CONFLICT);
@@ -112,7 +110,7 @@ public class PackController {
 
     @PutMapping(path ="")
     public @ResponseBody ResponseEntity<ResponseDTO> updatePack(@RequestBody PackForAlterationDTO packDTO) {
-        if(packDTO.validateForUpdate()){
+        if(Boolean.FALSE.equals(packDTO.validateForUpdate())){
             return new ResponseEntity<>(new ResponseDTO(false, "Please provide valid data for the update"), HttpStatus.CONFLICT);
         }
 
