@@ -18,8 +18,8 @@ public class Location {
     private float latitude;
     private int floor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "employee_id", referencedColumnName = "empl_id", insertable = false, updatable = false)
     private Employee employee;
 
     public Location() {

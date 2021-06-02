@@ -25,6 +25,9 @@ public class EmployeeService implements IEmployeeService {
         if(employee_id == 0){return new EmployeeDTO();}
 
         Employee employee = employeeRepo.findById(employee_id);
+
+        if(employee == null){ return new EmployeeDTO(); }
+
         return new EmployeeDTO(employee);
     }
 

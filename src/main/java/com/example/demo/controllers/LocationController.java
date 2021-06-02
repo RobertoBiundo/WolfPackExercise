@@ -24,7 +24,7 @@ public class LocationController {
         LocationDTO location = service.getLocationByEmployee(employee_id);
 
         if (location == null) {
-            return new ResponseEntity<>(new ResponseDTO(false, "Please provide a valid location identifier."), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseDTO(false, "Please provide a valid employee."), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(new ResponseDTO(true, location), HttpStatus.OK);

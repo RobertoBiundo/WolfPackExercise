@@ -25,6 +25,9 @@ public class LocationService implements ILocationService {
         if(location_id == 0){return new LocationDTO();}
 
         Location location = locationRepo.findById(location_id);
+
+        if(location == null){ return null; }
+
         return new LocationDTO(location);
     }
 

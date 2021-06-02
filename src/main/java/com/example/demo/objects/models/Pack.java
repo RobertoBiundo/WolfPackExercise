@@ -35,7 +35,7 @@ public class Pack implements Serializable {
     @JoinTable(
         name = "pack_members",
         joinColumns = { @JoinColumn(name = "pack_id") },
-        inverseJoinColumns = { @JoinColumn(name = "id")}
+        inverseJoinColumns = { @JoinColumn(name = "empl_id")}
     )
     Set<Employee> employees = new HashSet<>();
 

@@ -27,6 +27,9 @@ public class PackService implements IPackService {
         if(pack_id == 0){return new PackDTO();}
 
         Pack pack = packRepo.findById(pack_id);
+
+        if(pack == null){ return null; }
+
         return new PackDTO(pack);
     }
 

@@ -14,6 +14,7 @@ import java.util.Set;
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "empl_id")
     private int id;
 
     private boolean visible;
