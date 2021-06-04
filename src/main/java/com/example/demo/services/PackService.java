@@ -63,12 +63,18 @@ public class PackService implements IPackService {
     }
 
     @Override
-    public boolean createPack(PackForAlterationDTO packDTO) {
+    public boolean createPack(PackForAlterationDTO packDTO, Iterable<Employee> employees) {
         try{
             Pack pack = new Pack(packDTO);
 
             // set id to 0 to prevent update of existing record on create
             pack.setId(0);
+
+            if(employees != null){
+                for (Employee employee : employees){
+                    pack.addEmployee(employee);
+                }
+            }
 
             packRepo.save(pack);
             return true;

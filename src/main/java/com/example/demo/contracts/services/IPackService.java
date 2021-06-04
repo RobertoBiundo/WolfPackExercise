@@ -8,7 +8,7 @@ public interface IPackService {
     PackDTO getPack(int pack_id);
     Iterable<PackDTO> getAllPacks();
     boolean deletePack(int pack_id);
-    boolean createPack(PackForAlterationDTO packDTO);
+    boolean createPack(PackForAlterationDTO packDTO, Iterable<Employee> employees);
     boolean updatePack(PackForAlterationDTO packDTO);
     boolean removeEmployees(int pack_id, Iterable<Employee> employee_list);
     boolean addEmployees(int pack_id, Iterable<Employee> employee_list);

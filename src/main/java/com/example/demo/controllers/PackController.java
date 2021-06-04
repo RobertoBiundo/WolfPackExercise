@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @Controller
 @RequestMapping("/pack")
 public class PackController {
@@ -65,7 +67,12 @@ public class PackController {
             return new ResponseEntity<>(new ResponseDTO(false, "Please provide valid data for the creation"), HttpStatus.CONFLICT);
         }
 
-        boolean result = service.createPack(packDTO);
+        Iterable<Employee> employee_list = null;
+        if(packDTO.getEmployees() != null && !packDTO.getEmployees().isEmpty()){
+                employee_list = employeeService.getEmployees(packDTO.getEmployees());
+        }
+
+        boolean result = service.createPack(packDTO, employee_list);
 
         if (Boolean.FALSE.equals(result)){
             return new ResponseEntity<>(new ResponseDTO(false, "Something went wrong with the creation of the pack."), HttpStatus.CONFLICT);
