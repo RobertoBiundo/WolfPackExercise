@@ -21,6 +21,7 @@ public class EmployeeTests {
 
         Employee entity = new Employee(
                 id,
+                true,
                 name,
                 gender,
                 birthdate,

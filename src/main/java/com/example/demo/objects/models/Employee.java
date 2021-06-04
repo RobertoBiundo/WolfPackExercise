@@ -33,8 +33,9 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(int id, String name, int gender, Date birthdate, String job) {
+    public Employee(int id, boolean visible, String name, int gender, Date birthdate, String job) {
         this.id = id;
+        this.setVisible(visible);
         this.visible = true;
         this.name = name;
         this.gender = gender;

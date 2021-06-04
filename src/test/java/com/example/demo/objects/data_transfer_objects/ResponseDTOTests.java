@@ -25,7 +25,7 @@ class ResponseDTOTests {
     @Test
     void instantiateObjectEntity(){
         boolean status = true;
-        Employee entity = new Employee(1, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer");
+        Employee entity = new Employee(1, true, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer");
 
         ResponseDTO DTOentity = new ResponseDTO(status, entity);
 
@@ -46,7 +46,7 @@ class ResponseDTOTests {
     @Test
     void fillEmptyEntity(){
         boolean status = true;
-        Employee entity = new Employee(1, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer");
+        Employee entity = new Employee(1, true, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer");
         String message = "responce message";
 
         ResponseDTO DTOentity = new ResponseDTO();

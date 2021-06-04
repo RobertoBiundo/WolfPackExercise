@@ -29,11 +29,11 @@ public class EmployeeServiceTests {
     private final List<Employee> entityList = new ArrayList<>();
 
     private EmployeeServiceTests(){
-        entityList.add(new Employee(1, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer"));
-        entityList.add(new Employee(2, "Sophie Jansen",2, Date.valueOf("1986-08-21"),"Helpdesk"));
-        entityList.add(new Employee(3, "peter peterson",1, Date.valueOf("1965-11-09"),"Head management"));
-        entityList.add(new Employee(4, "Clara van Hoof",2, Date.valueOf("1982-02-26"),"Software engineer"));
-        entityList.add(new Employee(5, "Jan karelsen",1, Date.valueOf("1983-07-08"),"Software engineer"));
+        entityList.add(new Employee(1,true, "Karel Jansen",1, Date.valueOf("1991-11-03"),"Software engineer"));
+        entityList.add(new Employee(2,true, "Sophie Jansen",2, Date.valueOf("1986-08-21"),"Helpdesk"));
+        entityList.add(new Employee(3,true, "peter peterson",1, Date.valueOf("1965-11-09"),"Head management"));
+        entityList.add(new Employee(4,false, "Clara van Hoof",2, Date.valueOf("1982-02-26"),"Software engineer"));
+        entityList.add(new Employee(5,true, "Jan karelsen",1, Date.valueOf("1983-07-08"),"Software engineer"));
     }
 
     @Test
