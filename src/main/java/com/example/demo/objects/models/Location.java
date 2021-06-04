@@ -25,6 +25,14 @@ public class Location {
     public Location() {
     }
 
+    public Location(int id, int employee, float longitude, float latitude, int floor) {
+        this.id = id;
+        this.employee_id = employee;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.floor = floor;
+    }
+
     public Location(int employee, float longitude, float latitude, int floor) {
         this.employee_id = employee;
         this.longitude = longitude;

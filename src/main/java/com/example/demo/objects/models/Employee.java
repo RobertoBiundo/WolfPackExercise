@@ -33,7 +33,8 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(String name, int gender, Date birthdate, String job) {
+    public Employee(int id, String name, int gender, Date birthdate, String job) {
+        this.id = id;
         this.visible = true;
         this.name = name;
         this.gender = gender;
@@ -41,6 +42,13 @@ public class Employee implements Serializable {
         this.job = job;
     }
 
+    public Employee(String name, int gender, Date birthdate, String job) {
+        this.visible = true;
+        this.name = name;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.job = job;
+    }
 
     public Employee(EmployeeForAlterationDTO employeeDTO) {
         this.id = employeeDTO.getId();

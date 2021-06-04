@@ -20,6 +20,11 @@ public class Pack implements Serializable {
     public Pack() {
     }
 
+    public Pack(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Pack(String name) {
         this.name = name;
     }
